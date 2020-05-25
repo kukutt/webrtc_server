@@ -15,12 +15,6 @@ let renderVideo = (stream) => {
   videoEl.srcObject = stream;
 };
 
-// navigator.mediaDevices.getUserMedia({video: true, audio: true})
-//   .then((stream) => {
-//     renderVideo(stream);
-//   })
-//   .catch((err) => console.error(err))
-
 let peer = new Peer({
   host: '/',
   path: '/peerjs/myapp'
