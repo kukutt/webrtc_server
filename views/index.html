@@ -14,6 +14,7 @@
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
 
+    <!-- import libraries -->
     <script src="/lib/peerjs.js"></script>
     
     <!-- import the webpage's client-side javascript file -->
@@ -21,6 +22,14 @@
   </head>
   <body>
     
+    <input type="text" id="connect-to-peer" />
+    <button onclick="connectToPeer()">
+      Connect
+    </button>
+    
+    <div class="messages">
+      
+    </div>
 
     <footer>Made with <a href="https://glitch.com">Glitch</a>!</footer>
 
