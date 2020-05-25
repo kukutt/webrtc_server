@@ -13,8 +13,13 @@ let logMessage = (message) => {
 
 let renderVideo = (stream) => {
   videoEl.srcObject = stream;
-  videoEl.onloadedmetadata = (e) => videoEl.play();
 };
+
+// navigator.mediaDevices.getUserMedia({video: true, audio: true})
+//   .then((stream) => {
+//     renderVideo(stream);
+//   })
+//   .catch((err) => console.error(err))
 
 let peer = new Peer({
   host: '/',
@@ -36,12 +41,14 @@ peer.on('connection', (conn) => {
   });
 });
 peer.on('call', (call) => {
-  navigator.mediaDevices.getUserMedia({video: true, audio: true}, (stream) => {
-    call.answer(stream); // Answer the call with an A/V stream.
-    call.on('stream', renderVideo);
-  }, (err) => {
-    console.error('Failed to get local stream', err);
-  });
+  navigator.mediaDevices.getUserMedia({video: true, audio: true})
+    .then((stream) => {
+      call.answer(stream); // Answer the call with an A/V stream.
+      call.on('stream', renderVideo);
+    })
+    .catch((err) => {
+      console.error('Failed to get local stream', err);
+    });
 });
 
 let connectToPeer = () => {
@@ -56,12 +63,14 @@ let connectToPeer = () => {
     conn.send('hi!');
   });
   
-  navigator.mediaDevices.getUserMedia({video: true, audio: true}, (stream) => {
-    let call = peer.call(peerId, stream);
-    call.on('stream', renderVideo);
-  }, (err) => {
-    logMessage('Failed to get local stream', err);
-  });
+  navigator.mediaDevices.getUserMedia({video: true, audio: true})
+    .then((stream) => {
+      let call = peer.call(peerId, stream);
+      call.on('stream', renderVideo);
+    })
+    .catch((err) => {
+      logMessage('Failed to get local stream', err);
+    });
 };
 
 window.connectToPeer = connectToPeer;
