@@ -1,6 +1,8 @@
 // client-side js, loaded by index.html
 // run by the browser each time the page is loaded
 
+let Peer = window.Peer;
+
 let messagesEl = document.querySelector('.messages');
 let peerIdEl = document.querySelector('#connect-to-peer');
 let videoEl = document.querySelector('.remote-video');
@@ -15,6 +17,7 @@ let renderVideo = (stream) => {
   videoEl.srcObject = stream;
 };
 
+// Register with the peer server
 let peer = new Peer({
   host: '/',
   path: '/peerjs/myapp'
@@ -25,6 +28,8 @@ peer.on('open', (id) => {
 peer.on('error', (error) => {
   console.error(error);
 });
+
+// Handle incoming data connection
 peer.on('connection', (conn) => {
   logMessage('incoming peer connection!');
   conn.on('data', (data) => {
@@ -34,6 +39,8 @@ peer.on('connection', (conn) => {
     conn.send('hello!');
   });
 });
+
+// Handle incoming voice/video connection
 peer.on('call', (call) => {
   navigator.mediaDevices.getUserMedia({video: true, audio: true})
     .then((stream) => {
@@ -45,6 +52,7 @@ peer.on('call', (call) => {
     });
 });
 
+// Initiate outgoing connection
 let connectToPeer = () => {
   let peerId = peerIdEl.value;
   logMessage(`Connecting to ${peerId}...`);

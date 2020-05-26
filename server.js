@@ -3,8 +3,10 @@
 
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
-const { ExpressPeerServer } = require("peer");
 const express = require("express");
+
+const { ExpressPeerServer } = require("peer");
+
 const app = express();
 
 // make all the files in 'public' available
