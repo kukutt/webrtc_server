@@ -65,12 +65,7 @@ var setupPeerConnection = function () {
 var setupDataChannel = function (dataChannel) {
   dataChannel.onopen = function (e) {
     logMessage("DataChannel open and ready to be used");
-
-    $("#send_datachannel_msg").click(function () {
-      var msg = $("#datachannel_msg").val();
-      logMessage("Sending message: " + msg);
-      dataChannel.send(msg);
-    });
+    dataChannel.send("hello!");
   };
 
   dataChannel.onclose = function () {
