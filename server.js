@@ -30,6 +30,8 @@ wsServer.on('connection', (socket, request) => {
   socket.uuid = pathname;
   socket.on('message', message => {
     
+    //JSON parse;
+    
     //find message.IDXXX && sendto it;
     wsServer.findSend(message);
     console.log(message);
@@ -55,6 +57,7 @@ wsServer.findSend = function(message) {
       
       if(client.uuid === message.uuid)
       {
+        // JSON gen;
         client.send(message);
       }
     }
