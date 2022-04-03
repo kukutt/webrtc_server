@@ -111,12 +111,9 @@ var handleCandidate = function (msg) {
   });
 }
 
-
-
 // Initiate outgoing connection
 let connectToPeer = () => {
-      var channel_name = $("#channel_name").val();
-      var wsAddress = "wss://openhisilicon.glitch.me/" + channel_name;
+      var wsAddress = "wss://openhisilicon.glitch.me/" + peerIdEl.val();
       console.log("Attempting WebSocket connection to " + wsAddress);
 
       reliableSocket = new WebSocket(wsAddress);
