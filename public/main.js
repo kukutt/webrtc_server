@@ -54,6 +54,8 @@ peer.on('call', (call) => {
 
 // Initiate outgoing connection
 let connectToPeer = () => {
+  
+  
   let peerId = peerIdEl.value;
   logMessage(`Connecting to ${peerId}...`);
   
