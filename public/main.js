@@ -174,7 +174,6 @@ let connectToPeer = () => {
         }
       };
 
-
     };
 
 window.connectToPeer = connectToPeer;

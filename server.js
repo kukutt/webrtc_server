@@ -17,8 +17,10 @@ const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
-
 const wss = new WebSocket.Server({ port: 8088 })
+
+app.use('/wss', wss);
+
 
 wss.on('connection', (ws) => {
   ws.on('message', (message) => {
@@ -28,4 +30,3 @@ wss.on('connection', (ws) => {
 })
 
 
-app.use('/wss', wss);
