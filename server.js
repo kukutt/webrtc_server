@@ -1,6 +1,5 @@
 const express = require("express");
-
-const { ExpressMyServer } = require("MyServer");
+const WebSocket = require('ws')
 
 const app = express();
 
@@ -14,26 +13,13 @@ app.get("/", (request, response) => {
 });
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
+const listener = app.listen(8080, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
-// my server
-const myServer = ExpressMyServer(listener, {
-  debug: true,
-  path: '/myapp'
-});
-
-app.use('/peerjs', peerServer);
 
 
-
-
-
-
-const WebSocket = require('ws')
-
-const wss = new WebSocket.Server({ port: 8080 })
+const wss = new WebSocket.Server({ port: 8088 })
 
 wss.on('connection', (ws) => {
   ws.on('message', (message) => {
@@ -41,3 +27,6 @@ wss.on('connection', (ws) => {
   })
   ws.send('ho!')
 })
+
+
+app.use('/wss', wss);
