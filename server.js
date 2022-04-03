@@ -18,6 +18,7 @@ const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
+
 // Set up a headless websocket server that prints any
 // events that come in.
 const wsServer = new ws.Server({ noServer: true });
@@ -26,6 +27,7 @@ wsServer.on('connection', (socket, request) => {
   const { pathname } = parse(request.url);
   //set IDXXX to connection;
   
+  socket.uuid = pathname;
   socket.on('message', message => {
     
     //find message.IDXXX && sendto it;
@@ -46,4 +48,15 @@ listener.on('upgrade', (request, socket, head) => {
 });
 
 
+wsServer.broadcast = function(id, data) {
+  this.clients.forEach(function(client) {
+    if(client.readyState === WebSocket.OPEN) {
+      
+      if(client.id === id)
+      {  
+        client.send(data);
+      }  
+    }
+  });
+};
 
