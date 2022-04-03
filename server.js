@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { ExpressPeerServer } = require("ws");
+const { ExpressMyServer } = require("MyServer");
 
 const app = express();
 
@@ -18,8 +18,8 @@ const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
-// peerjs server
-const peerServer = ExpressPeerServer(listener, {
+// my server
+const myServer = ExpressMyServer(listener, {
   debug: true,
   path: '/myapp'
 });
