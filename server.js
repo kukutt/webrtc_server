@@ -24,10 +24,15 @@ const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', (socket, request) => {
   
   const { pathname } = parse(request.url);
+  //set IDXXX to connection;
   
+  socket.on('message', message => {
+    
+    //find message.IDXXX && sendto it;
+    console.log(message);
+    
+  });
   
-  
-  socket.on('message', message => console.log(message));
 });
 
 // `server` is a vanilla Node.js HTTP server, so use
