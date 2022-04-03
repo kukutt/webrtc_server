@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "express": "^4.17.3",
-    "ws": "^8.5.0"
+    "ws": "^8.5.0",
+    "url": "^0.11.0"
   },
   "engines": {
     "node": "12.x"

@@ -1,5 +1,6 @@
 const express = require("express");
 const ws = require('ws');
+const parse = require('url');
 
 const app = express();
 
@@ -20,7 +21,12 @@ const listener = app.listen(process.env.PORT, () => {
 // Set up a headless websocket server that prints any
 // events that come in.
 const wsServer = new ws.Server({ noServer: true });
-wsServer.on('connection', socket => {
+wsServer.on('connection', (socket, request) => {
+  
+  const { pathname } = parse(request.url);
+  
+  
+  
   socket.on('message', message => console.log(message));
 });
 
