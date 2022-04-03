@@ -25,12 +25,13 @@ const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', (socket, request) => {
   
   const { pathname } = parse(request.url);
-  //set IDXXX to connection;
   
+  //set IDXXX to connection;
   socket.uuid = pathname;
   socket.on('message', message => {
     
     //find message.IDXXX && sendto it;
+    wsServer.findSend(message);
     console.log(message);
     
   });
@@ -48,14 +49,14 @@ listener.on('upgrade', (request, socket, head) => {
 });
 
 
-wsServer.broadcast = function(id, data) {
+wsServer.findSend = function(message) {
   this.clients.forEach(function(client) {
     if(client.readyState === WebSocket.OPEN) {
       
-      if(client.id === id)
-      {  
-        client.send(data);
-      }  
+      if(client.uuid === message.uuid)
+      {
+        client.send(message);
+      }
     }
   });
 };
