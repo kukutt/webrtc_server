@@ -130,7 +130,7 @@ let connectToPeer = () => {
   
       reliableSocket._scheduleHeartbeat =  function () {
         reliableSocket._wsPingTimer = setTimeout(function () {
-          reliableSocket.sendMessage("hello", {});
+          reliableSocket.sendMessage("heartbeat", {});
           reliableSocket._scheduleHeartbeat();
           }, 5000);
       };
@@ -146,7 +146,8 @@ let connectToPeer = () => {
 
       // Simple helper to send JSON messages with a given type
       reliableSocket.sendMessage = function (type, msg) {
-        logMessage("Sending msg of type: " + type);
+        if(type != "heartbeat")
+          logMessage("Sending msg of type: " + type);
         var jsonStr = JSON.stringify(msg);
         var msg_clone_ = JSON.parse(jsonStr);
         msg_clone_["type"] = type;
@@ -155,12 +156,11 @@ let connectToPeer = () => {
       }
 
       reliableSocket.onmessage = function (event) {
-        console.log("Got msg", event);
         
         var msg = JSON.parse(event.data);
-
-        logMessage("Received msg of type: " + msg.type);
-        console.log(msg);
+        
+        if(msg["type"] != "heartbeat")
+          logMessage("Received msg of type: " + msg.type);
 
         switch (msg.type) {
           case "offer":
@@ -183,7 +183,7 @@ let connectToPeer = () => {
             }
             break;
           default:
-            console.log("WARNING: Ignoring unknown msg of type '" + msg.type + "'");
+            //console.log("WARNING: Ignoring unknown msg of type '" + msg.type + "'");
             break;
         }
         

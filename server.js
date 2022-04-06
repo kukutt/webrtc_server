@@ -46,6 +46,12 @@ wsServer.on('connection', (conn, request) => {
     console.log(message);
     msg = JSON.parse(message);
 
+    if(msg["type"] === "heartbeat")
+    {
+      var rsp = JSON.stringify(msg);
+      conn.send(rsp);
+    }  
+    else
     wsServer.clients.forEach(function each(client) 
     {
       if(client.uuid === msg["dst"])
