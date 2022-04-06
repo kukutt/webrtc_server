@@ -125,7 +125,16 @@ let connectToPeer = () => {
         // Socket is now ready to send and receive messages
         console.log("reliableSocket is open and ready to use");
         reliableSocket.sendMessage("hello", {});
+        reliableSocket._scheduleHeartbeat();
       };
+  
+      reliableSocket._scheduleHeartbeat =  function () {
+        reliableSocket._wsPingTimer = setTimeout(function () {
+          reliableSocket.sendMessage("hello", {});
+          reliableSocket._scheduleHeartbeat();
+          }, 5000);
+      };
+  
 
       reliableSocket.onerror = function (event) {
         // Socket failed to connect
