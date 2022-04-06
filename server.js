@@ -29,14 +29,19 @@ wsServer.on('connection', (conn, request) => {
   //set IDXXX to connection;
   conn.uuid = pathname;
   conn.on('message', message => {
-    
+    var msg;
     console.log(message);
     
-    //JSON parse;
-    var msg = JSON.parse(message);
+    try {
+      msg = JSON.parse(message);
+    } catch (e) {
+      console.log("Error parsing JSON");
+      msg = {};
+    }
+    
+    
     //find message.IDXXX && sendto it;
     wsServer.findSend(conn.uuid, msg);
-    
     
   });
   
