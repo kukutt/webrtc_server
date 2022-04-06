@@ -113,7 +113,10 @@ var handleCandidate = function (msg) {
 
 // Initiate outgoing connection
 let connectToPeer = () => {
-      var wsAddress = "wss://openhisilicon.glitch.me/hiview-client";
+  
+      var ishttps = ('https:' == document.location.protocol)?true:false;
+  
+      var wsAddress = (ishttps == true?'wss://':'ws://') + "openhisilicon.glitch.me/hiview-client";
       console.log("Attempting WebSocket connection to " + wsAddress);
 
       reliableSocket = new WebSocket(wsAddress);
@@ -144,7 +147,9 @@ let connectToPeer = () => {
 
       reliableSocket.onmessage = function (event) {
         console.log("Got msg", event);
-
+        logMessage("Got msg: " + event.data);
+        return;
+        
         var msg = JSON.parse(event.data);
 
         logMessage("Received msg of type: " + msg.type);

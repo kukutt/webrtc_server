@@ -23,7 +23,7 @@ const listener = app.listen(process.env.PORT, () => {
 
 // Set up a headless websocket server that prints any
 // events that come in.
-const wsServer = new ws.Server({ noServer: true });
+const wsServer = new ws.Server({ noServer: true,});
 
 
 // `server` is a vanilla Node.js HTTP server, so use
