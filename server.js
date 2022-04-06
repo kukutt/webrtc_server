@@ -42,16 +42,17 @@ wsServer.on('connection', (conn, request) => {
   
   //set UUID to connection;
   const { pathname } = parse(request.url);
-  conn.uuid = pathname;
+  //conn.uuid = pathname;
   
   conn.on('message', message => {
     var msg;
     console.log(message);
     msg = JSON.parse(message);
-    if(msg.type === 'heartbeat')
-      conn.send('heartbeat');
-    else
-      wsServer.findSend(conn.uuid, msg);
+    
+  
+    conn.send("heartbeat");
+      //wsServer.findSend(conn.uuid, msg);
+
   });
   
 });
