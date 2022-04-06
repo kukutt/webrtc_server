@@ -113,7 +113,7 @@ var handleCandidate = function (msg) {
 
 // Initiate outgoing connection
 let connectToPeer = () => {
-      var wsAddress = "wss://openhisilicon.glitch.me/" + peerIdEl.vlaue;
+      var wsAddress = "ws://openhisilicon.glitch.me/" + peerIdEl.vlaue;
       console.log("Attempting WebSocket connection to " + wsAddress);
 
       reliableSocket = new WebSocket(wsAddress);
