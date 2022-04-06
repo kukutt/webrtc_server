@@ -35,7 +35,7 @@ wsServer.on('connection', (socket, request) => {
     //JSON parse;
     var msg = JSON.parse(message);
     //find message.IDXXX && sendto it;
-    wsServer.findSend(msg);
+    wsServer.findSend(socket.uuid, msg);
     
     
   });
@@ -53,14 +53,14 @@ listener.on('upgrade', (request, socket, head) => {
 });
 
 
-wsServer.findSend = function(msg) {
+wsServer.findSend = function(src, msg) {
   this.clients.forEach(function(client) {
     if(client.readyState === WebSocket.OPEN) {
       
-      if(client.uuid === msg.uuid)
+      if(client.uuid === msg.dst)
       {
         // JSON gen;
-        msg.
+        msg["src"] = src;
         var message = JSON.stringify(msg);
         client.send(message);
       }
