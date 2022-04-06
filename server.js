@@ -22,20 +22,20 @@ const listener = app.listen(process.env.PORT, () => {
 // Set up a headless websocket server that prints any
 // events that come in.
 const wsServer = new ws.Server({ noServer: true });
-wsServer.on('connection', (socket, request) => {
+wsServer.on('connection', (conn, request) => {
   
   const { pathname } = parse(request.url);
   
   //set IDXXX to connection;
-  socket.uuid = pathname;
-  socket.on('message', message => {
+  conn.uuid = pathname;
+  conn.on('message', message => {
     
     console.log(message);
     
     //JSON parse;
     var msg = JSON.parse(message);
     //find message.IDXXX && sendto it;
-    wsServer.findSend(socket.uuid, msg);
+    wsServer.findSend(conn.uuid, msg);
     
     
   });
@@ -46,9 +46,9 @@ wsServer.on('connection', (socket, request) => {
 // the same ws upgrade process described here:
 // https://www.npmjs.com/package/ws#multiple-servers-sharing-a-single-https-server
 
-listener.on('upgrade', (request, socket, head) => {
-  wsServer.handleUpgrade(request, socket, head, socket => {
-    wsServer.emit('connection', socket, request);
+listener.on('upgrade', (request, conn, head) => {
+  wsServer.handleUpgrade(request, conn, head, conn => {
+    wsServer.emit('connection', conn, request);
   });
 });
 
