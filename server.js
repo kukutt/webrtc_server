@@ -55,9 +55,9 @@ wsServer.on('connection', (conn, request) => {
       msg = {};
     }
     
-    
+    conn.send("hi!");
     //find message.IDXXX && sendto it;
-    wsServer.findSend(conn.uuid, msg);
+    //wsServer.findSend(conn.uuid, msg);
     
   });
   
