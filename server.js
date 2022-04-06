@@ -1,6 +1,7 @@
 const express = require("express");
 const ws = require('ws');
 const parse = require('url');
+const http = require('http');
 
 const app = express();
 
@@ -13,8 +14,11 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
+
+const server = http.createServer(app);
+
 // listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
+const listener = server.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
