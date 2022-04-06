@@ -40,20 +40,21 @@ listener.on('upgrade', (request, conn, head) => {
 
 wsServer.on('connection', (conn, request) => {
   
-  const { pathname } = parse(request.url);
+  //const { pathname } = parse(request.url);
   
   //set IDXXX to connection;
-  conn.uuid = pathname;
+  //conn.uuid = pathname;
+  
   conn.on('message', message => {
     var msg;
     console.log(message);
     
-    try {
-      msg = JSON.parse(message);
-    } catch (e) {
-      console.log("Error parsing JSON");
-      msg = {};
-    }
+    //try {
+    //  msg = JSON.parse(message);
+    //} catch (e) {
+    //  console.log("Error parsing JSON");
+    //  msg = {};
+    //}
     
     conn.send("hi!");
     //find message.IDXXX && sendto it;
