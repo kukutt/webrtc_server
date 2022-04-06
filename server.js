@@ -40,18 +40,16 @@ listener.on('upgrade', (request, conn, head) => {
 
 wsServer.on('connection', (conn, request) => {
   
-  //set UUID to connection;
-  const { pathname } = parse(request.url);
-  //conn.uuid = pathname;
+
+  conn.uuid = request.url;
   
   conn.on('message', message => {
     var msg;
     console.log(message);
     msg = JSON.parse(message);
     
-  
-    conn.send("heartbeat");
-      //wsServer.findSend(conn.uuid, msg);
+    //conn.send(conn.uuid);
+    wsServer.findSend(conn.uuid, msg);
 
   });
   
@@ -64,7 +62,7 @@ wsServer.findSend = function(src, msg) {
   this.clients.forEach(function(client) {
     if(client.readyState === WebSocket.OPEN) {
       
-      if(client.uuid === msg.dst)
+      if(client.uuid === msg["dst"])
       {
         // JSON gen;
         msg["src"] = src;
