@@ -58,19 +58,19 @@ wsServer.on('connection', (conn, request) => {
   });
   
   conn.on('close', function () {
-    if (conn.uuid) {
-      if (conn.otherName) {
-        console.log(""Disconnecting user from"", conn.otherName);
-        var conn = users[conn.otherName];
-        conn.otherName = null;
-
-        if (conn != null) {
-          sendTo(conn, {
-            type: ""leave""
-          });
-        }
-      }
-    }
+    
+    wsServer.clients.forEach(function each(client) 
+    {
+      if(client.uuid != conn.uuid)
+      {
+        var msg = {
+          type: "leave",
+          src: conn.uuid
+        };
+        var rsp = JSON.stringify(msg);
+        client.send(rsp);
+      } 
+    });
   });
   
 });
