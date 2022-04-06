@@ -30,7 +30,8 @@ var setupPeerConnection = function () {
 
   peerConnection = new RTCPeerConnection({
     iceServers: [{
-        urls: "stun:208.91.197.54:3478"
+        //urls: "stun:208.91.197.54:3478"
+        urls: "stun:77.72.169.213:3478"
        }]
   });
 
