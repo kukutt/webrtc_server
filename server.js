@@ -30,11 +30,13 @@ wsServer.on('connection', (socket, request) => {
   socket.uuid = pathname;
   socket.on('message', message => {
     
-    //JSON parse;
-    
-    //find message.IDXXX && sendto it;
-    wsServer.findSend(message);
     console.log(message);
+    
+    //JSON parse;
+    var msg = JSON.parse(message);
+    //find message.IDXXX && sendto it;
+    wsServer.findSend(msg);
+    
     
   });
   
@@ -51,13 +53,15 @@ listener.on('upgrade', (request, socket, head) => {
 });
 
 
-wsServer.findSend = function(message) {
+wsServer.findSend = function(msg) {
   this.clients.forEach(function(client) {
     if(client.readyState === WebSocket.OPEN) {
       
-      if(client.uuid === message.uuid)
+      if(client.uuid === msg.uuid)
       {
         // JSON gen;
+        msg.
+        var message = JSON.stringify(msg);
         client.send(message);
       }
     }
