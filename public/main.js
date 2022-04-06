@@ -137,7 +137,7 @@ let connectToPeer = () => {
   
 
       reliableSocket.onerror = function (event) {
-        // Socket failed to connect
+        console.log("ERROR: Reliable socket has onerror");
       };
 
       reliableSocket.onclose = function (event) {
