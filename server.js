@@ -48,7 +48,10 @@ wsServer.on('connection', (conn, request) => {
     var msg;
     console.log(message);
     msg = JSON.parse(message);
-    wsServer.findSend(conn.uuid, msg);
+    if(msg.type === 'heartbeat')
+      conn.send('heartbeat');
+    else
+      wsServer.findSend(conn.uuid, msg);
   });
   
 });
