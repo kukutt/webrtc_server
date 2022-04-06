@@ -50,7 +50,7 @@ wsServer.on('connection', (conn, request) => {
     {
       if(client.uuid === msg["dst"])
       {
-        msg["src"]
+        msg["src"] = conn.uuid;
         var rsp = JSON.stringify(msg);
         client.send(rsp);
       } 
