@@ -147,8 +147,6 @@ let connectToPeer = () => {
 
       reliableSocket.onmessage = function (event) {
         console.log("Got msg", event);
-        logMessage("Got msg: " + event.data);
-        return;
         
         var msg = JSON.parse(event.data);
 
