@@ -37,49 +37,25 @@ listener.on('upgrade', (request, conn, head) => {
 });
 
 
-
-wsServer.findSend = function(src, msg) {
-  this.clients.forEach(function(client) {
-    if(client.readyState === WebSocket.OPEN) {
-      
-      //if(client.uuid === msg["dst"])
-      {
-        // JSON gen;
-        //msg["src"] = src;
-        var message = JSON.stringify(msg);
-        client.send(message);
-      }
-    }
-  });
-};
-
-
-
 wsServer.on('connection', (conn, request) => {
   
-
   conn.uuid = request.url;
-  
+
   conn.on('message', message => {
     var msg;
     console.log(message);
     msg = JSON.parse(message);
-    
-    //var rsp = JSON.stringify(msg);
-    //conn.send(rsp);
-    
-    wsServer.clients.forEach(function each(client) {
-      
+
+    wsServer.clients.forEach(function each(client) 
+    {
       if(client.uuid === msg["dst"])
       {
+        msg["src"]
         var rsp = JSON.stringify(msg);
-        conn.send(rsp);
-        console.log('Client.ID: ' + client.id);
+        client.send(rsp);
       } 
     });
-
   });
-  
 });
 
 

@@ -141,7 +141,7 @@ let connectToPeer = () => {
         var jsonStr = JSON.stringify(msg);
         var msg_clone_ = JSON.parse(jsonStr);
         msg_clone_["type"] = type;
-        msg_clone_["dst"]  = "/hiview-camera";
+        msg_clone_["dst"]  = $(peerIdEl).val();
         reliableSocket.send(JSON.stringify(msg_clone_));
       }
 
