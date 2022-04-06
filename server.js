@@ -38,6 +38,23 @@ listener.on('upgrade', (request, conn, head) => {
 
 
 
+wsServer.findSend = function(src, msg) {
+  this.clients.forEach(function(client) {
+    if(client.readyState === WebSocket.OPEN) {
+      
+      //if(client.uuid === msg["dst"])
+      {
+        // JSON gen;
+        //msg["src"] = src;
+        var message = JSON.stringify(msg);
+        client.send(message);
+      }
+    }
+  });
+};
+
+
+
 wsServer.on('connection', (conn, request) => {
   
 
@@ -48,8 +65,18 @@ wsServer.on('connection', (conn, request) => {
     console.log(message);
     msg = JSON.parse(message);
     
-    //conn.send(conn.uuid);
-    wsServer.findSend(conn.uuid, msg);
+    //var rsp = JSON.stringify(msg);
+    //conn.send(rsp);
+    
+    wsServer.clients.forEach(function each(client) {
+      
+      if(client.uuid === msg["dst"])
+      {
+        var rsp = JSON.stringify(msg);
+        conn.send(rsp);
+        console.log('Client.ID: ' + client.id);
+      } 
+    });
 
   });
   
@@ -58,18 +85,4 @@ wsServer.on('connection', (conn, request) => {
 
 
 
-wsServer.findSend = function(src, msg) {
-  this.clients.forEach(function(client) {
-    if(client.readyState === WebSocket.OPEN) {
-      
-      if(client.uuid === msg["dst"])
-      {
-        // JSON gen;
-        msg["src"] = src;
-        var message = JSON.stringify(msg);
-        client.send(message);
-      }
-    }
-  });
-};
 
