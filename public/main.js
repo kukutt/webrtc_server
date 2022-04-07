@@ -10,6 +10,8 @@ var dataChannel = null;
 var remoteCandidates = [];
 var have_offer = false;
 
+var client_id = 0;
+
 let messagesEl = document.querySelector('.messages');
 let peerIdEl = document.querySelector('#connect-to-peer');
 let videoEl = document.querySelector('.remote-video');
@@ -117,7 +119,7 @@ let connectToPeer = () => {
   
       var ishttps = ('https:' == document.location.protocol)?true:false;
   
-      var wsAddress = (ishttps == true?'wss://':'ws://') + "openhisilicon.glitch.me/hiview-client";
+      var wsAddress = (ishttps == true?'wss://':'ws://') + "openhisilicon.glitch.me/hiview-client" + client_id++;
       console.log("Attempting WebSocket connection to " + wsAddress);
 
       reliableSocket = new WebSocket(wsAddress);
