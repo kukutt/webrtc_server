@@ -154,7 +154,7 @@ let connectToPeer = () => {
         
         if(type != "heartbeat")
         {  
-          logMessage("Sending msg of type: " + type + (type === "hi")?:"");
+          logMessage("Sending msg of type: " + type);
         }
         var jsonStr = JSON.stringify(msg);
         var msg_clone_ = JSON.parse(jsonStr);
@@ -168,8 +168,14 @@ let connectToPeer = () => {
         var msg = JSON.parse(event.data);
         
         if(msg["type"] != "heartbeat")
-          logMessage("Received msg of type: " + msg.type);
-
+        {  
+          logMessage("Received msg of type: " + msg.type + ((msg["type"] === "hi")?msg["msg"]:""));
+          if(msg["type"] === "hi")
+          {
+            reliableSocket.close();
+            reliableSocket = null;
+          }
+        }
         switch (msg.type) {
           case "offer":
             createAnswer(msg);
