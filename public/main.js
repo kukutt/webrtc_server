@@ -37,6 +37,7 @@ var setupPeerConnection = function () {
 
   peerConnection.onaddstream = function(obj) {
     videoEl.srcObject = obj.stream;
+    videoEl.play();
   }
 
   peerConnection.onicecandidate = function (event) {
