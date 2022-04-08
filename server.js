@@ -46,12 +46,17 @@ wsServer.on('connection', (conn, request) => {
     console.log(message);
     msg = JSON.parse(message);
 
+    if(msg["type"] === "hello")
+    {
+      conn.cli = 1;
+    }
+    
     if(msg["type"] === "heartbeat")
     {
       var rsp = JSON.stringify(msg);
       conn.send(rsp);
     }  
-    else 
+    else
     wsServer.clients.forEach(function each(client) 
     {
       if(client.uuid === msg["dst"])
@@ -67,7 +72,7 @@ wsServer.on('connection', (conn, request) => {
     
     wsServer.clients.forEach(function each(client) 
     {
-      if(client.uuid != conn.uuid)
+      if(client.uuid != conn.uuid && client.cli != 1)
       {
         var msg = {
           type: "leave",

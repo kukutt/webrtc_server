@@ -151,8 +151,11 @@ let connectToPeer = () => {
 
       // Simple helper to send JSON messages with a given type
       reliableSocket.sendMessage = function (type, msg) {
+        
         if(type != "heartbeat")
-          logMessage("Sending msg of type: " + type);
+        {  
+          logMessage("Sending msg of type: " + type + (type === "hi")?:"");
+        }
         var jsonStr = JSON.stringify(msg);
         var msg_clone_ = JSON.parse(jsonStr);
         msg_clone_["type"] = type;
