@@ -169,8 +169,8 @@ let connectToPeer = () => {
         
         if(msg["type"] != "heartbeat")
         {  
-          logMessage("Received msg of type: " + msg.type + ((msg["type"] === "hi")?msg["msg"]:""));
-          if(msg["type"] === "hi")
+          logMessage("Received msg of type: " + msg.type + ((msg["type"] === "close")?msg["msg"]:""));
+          if(msg["type"] === "close")
           {
             reliableSocket.close();
             reliableSocket = null;
