@@ -37,6 +37,8 @@ var setupPeerConnection = function () {
 
   peerConnection.onaddstream = function(obj) {
     videoEl.srcObject = obj.stream;
+    videoEl.setAttribute('width', document.body.clientWidth);
+    videoEl.setAttribute('height', 'auto');
     videoEl.play();
   }
 
