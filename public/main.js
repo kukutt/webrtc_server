@@ -13,6 +13,7 @@ var have_offer = false;
 let messagesEl = document.querySelector('.messages');
 let peerIdEl = document.querySelector('#connect-to-peer');
 let videoEl = document.querySelector('.remote-video');
+let audioEl = document.querySelector('.remote-audio');
 
 let logMessage = (message) => {
   let newMessage = document.createElement('div');
@@ -36,7 +37,7 @@ var setupPeerConnection = function () {
   });
 
   peerConnection.onaddstream = function(obj) {
-    if(obj.stream.id === "a")
+    if(obj.stream.id === "v")
     {  
       videoEl.srcObject = obj.stream;
       videoEl.setAttribute('width', document.body.clientWidth);
@@ -44,7 +45,7 @@ var setupPeerConnection = function () {
     }
     else if(obj.stream.id === "a")
     {
-      videoEl.srcObject = obj.stream;
+      audioEl.srcObject = obj.stream;
     }
   }
 
