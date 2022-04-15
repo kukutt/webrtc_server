@@ -36,11 +36,16 @@ var setupPeerConnection = function () {
   });
 
   peerConnection.onaddstream = function(obj) {
-    if(obj.stream.id === "1")
-    videoEl.srcObject = obj.stream;
-    videoEl.setAttribute('width', document.body.clientWidth);
-    videoEl.setAttribute('height', 'auto');
-    //videoEl.play();
+    if(obj.stream.id === "v")
+    {  
+      videoEl.srcObject = obj.stream;
+      videoEl.setAttribute('width', document.body.clientWidth);
+      videoEl.setAttribute('height', 'auto');
+    }
+    else if(obj.stream.id === "a")
+    {
+      videoEl.srcObject = obj.stream;
+    }
   }
 
   peerConnection.onicecandidate = function (event) {
