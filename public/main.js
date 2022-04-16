@@ -37,13 +37,13 @@ var setupPeerConnection = function () {
   });
 
   peerConnection.onaddstream = function(obj) {
-    if(obj.stream.id === "v")
+    if(obj.stream.id === "0")
     {  
       videoEl.srcObject = obj.stream;
       videoEl.setAttribute('width', document.body.clientWidth);
       videoEl.setAttribute('height', 'auto');
     }
-    else if(obj.stream.id === "a")
+    else if(obj.stream.id === "1")
     {
       audioEl.srcObject = obj.stream;
     }
