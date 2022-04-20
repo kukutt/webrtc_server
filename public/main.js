@@ -42,11 +42,12 @@ var setupPeerConnection = function () {
       videoEl.srcObject = obj.stream;
       videoEl.setAttribute('width', document.body.clientWidth);
       videoEl.setAttribute('height', 'auto');
-      
+      videoEl.play();
     }
     else if(obj.stream.id === "1")
     {
       audioEl.srcObject = obj.stream;
+      audioEl.play();
     }
   }
 
