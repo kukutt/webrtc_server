@@ -42,6 +42,7 @@ var setupPeerConnection = function () {
       videoEl.srcObject = obj.stream;
       videoEl.setAttribute('width', document.body.clientWidth);
       videoEl.setAttribute('height', 'auto');
+      
     }
     else if(obj.stream.id === "1")
     {
