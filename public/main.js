@@ -131,7 +131,9 @@ function getUUID(randomLength){
 
 
 let genQRcode = () => {
-  
+ 
+  $('#QRcodeCanvas').empty();
+
   jQuery('#QRcodeCanvas').qrcode({
 		text	: "http://jetienne.com"
 	});
