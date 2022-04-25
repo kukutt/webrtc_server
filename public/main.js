@@ -135,7 +135,7 @@ let genQRcode = () => {
   $('#QRcodeCanvas').empty();
 
   jQuery('#QRcodeCanvas').qrcode({
-		text	: "http://jetienne.com"
+		text	: $('#SSID').val() + ' ' + $('#PWD').val()
 	});
   
 };
