@@ -164,7 +164,7 @@ let connectToPeer = () => {
         reliableSocket._wsPingTimer = setTimeout(function () {
           reliableSocket.sendMessage("heartbeat", {});
           reliableSocket._scheduleHeartbeat();
-          }, 5000);
+          }, 15000);
       };
   
 
