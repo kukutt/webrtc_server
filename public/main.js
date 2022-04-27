@@ -184,10 +184,21 @@ let connectToPeer = () => {
           logMessage("Sending msg of type: " + type);
         }
         var jsonStr = JSON.stringify(msg);
+        
+        
+        
         var msg_clone_ = JSON.parse(jsonStr);
         msg_clone_["type"] = type;
+        
+        
+        
         msg_clone_["dst"]  = $(peerIdEl).val();
+
+        logMessage("Sending msg before type: " + type);
+        
         reliableSocket.send(JSON.stringify(msg_clone_));
+        
+        logMessage("Sending msg after type: " + type);
       }
 
       reliableSocket.onmessage = function (event) {
