@@ -192,7 +192,8 @@ let connectToPeer = () => {
         
         
         
-        msg_clone_["dst"]  = $(peerIdEl).val();
+        //msg_clone_["dst"]  = $(peerIdEl).val();
+        msg_clone_["dst"]  = peerIdEl.value;
 
         logMessage("Sending msg before type: " + type);
         
