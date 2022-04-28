@@ -30,11 +30,18 @@ var setupPeerConnection = function () {
   //peerConnection = new RTCPeerConnection();
 
   peerConnection = new RTCPeerConnection({
-    iceServers: [{
+    iceServers: [
+      {
         urls: "stun:openrelay.metered.ca:80"
         //urls: "stun:stun.kinesisvideo.us-west-2.amazonaws.com:443"
         //urls: "stun:stun.kinesisvideo.ap-east-1.amazonaws.com:443"
-       }]
+      },
+      {
+        urls: "turn:openrelay.metered.ca:80",
+        username: "openrelayproject",
+        credential: "openrelayproject",
+      }
+      ]
   });
 
   peerConnection.onaddstream = function(obj) {
