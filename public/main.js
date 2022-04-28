@@ -31,9 +31,9 @@ var setupPeerConnection = function () {
 
   peerConnection = new RTCPeerConnection({
     iceServers: [{
-        //urls: "stun:77.72.169.213:3478"
+        urls: "stun:openrelay.metered.ca:80"
         //urls: "stun:stun.kinesisvideo.us-west-2.amazonaws.com:443"
-        urls: "stun:stun.kinesisvideo.ap-east-1.amazonaws.com:443"
+        //urls: "stun:stun.kinesisvideo.ap-east-1.amazonaws.com:443"
        }]
   });
 
