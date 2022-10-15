@@ -186,7 +186,6 @@ let connectToPeer = () => {
 
       // Simple helper to send JSON messages with a given type
       reliableSocket.sendMessage = function (type, msg) {
-        console.log("[IPCDEV]sendMessage", type, msg);
         
         if(type != "heartbeat")
         {  
@@ -200,7 +199,6 @@ let connectToPeer = () => {
       }
 
       reliableSocket.onmessage = function (event) {
-        console.log("[IPCDEV]onmessage1", event);
         
         var msg = JSON.parse(event.data);
         
@@ -213,7 +211,6 @@ let connectToPeer = () => {
             reliableSocket = null;
           }
         }
-        console.log("[IPCDEV]onmessage2", msg);
         switch (msg.type) {
           case "offer":
             createAnswer(msg);
