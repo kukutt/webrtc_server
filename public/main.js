@@ -156,7 +156,7 @@ let connectToPeer = () => {
   
       var ishttps = ('https:' == document.location.protocol)?true:false;
   
-      var wsAddress = (ishttps == true?'wss://':'ws://') + "openhisilicon.glitch.me/hiview-client" + getUUID(16);
+      var wsAddress = (ishttps == true?'wss://':'ws://') + "kukutt.glitch.me/hiview-client" + getUUID(16);
       console.log("Attempting WebSocket connection to " + wsAddress);
 
       reliableSocket = new WebSocket(wsAddress);
