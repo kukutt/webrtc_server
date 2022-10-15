@@ -200,6 +200,7 @@ let connectToPeer = () => {
       }
 
       reliableSocket.onmessage = function (event) {
+        console.log("[IPCDEV]onmessage1", event);
         
         var msg = JSON.parse(event.data);
         
@@ -212,6 +213,7 @@ let connectToPeer = () => {
             reliableSocket = null;
           }
         }
+        console.log("[IPCDEV]onmessage2", msg);
         switch (msg.type) {
           case "offer":
             createAnswer(msg);
