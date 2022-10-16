@@ -32,17 +32,17 @@
     <video class="remote-audio" autoplay playsinline></video>
   </body>
   <script>
-    function getQueryString1(name) {
+    function getQueryString1(name1) {
       alert("aa1");
-var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+var reg = new RegExp('(^|&)' + name1 + '=([^&]*)(&|$)', 'i');
 var r = window.location.search.substr(1).match(reg);
 if (r != null) {
 return unescape(r[2]);
 }
-return null;
+return "/hello";
 }
     alert("ff");
-   alert(GetQueryString1("uuid"));
+   alert(GetQueryString1('uuid'));
       document.getElementById('connect-to-peer').value = "/ccc";
   </script>
 </html>
