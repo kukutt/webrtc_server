@@ -28,22 +28,21 @@
     <input type="text" id="PWD"  value="password"/>
     <button onclick="genQRcode()">QRcode</button>
     <div id="QRcodeCanvas"></div>
-    <a href="/test.html">test</a>
     <video class="remote-audio" autoplay playsinline></video>
   </body>
   <script>
     function getQueryString(name) {
-     // alert("aa1");
-var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-var r = window.location.search.substr(1).match(reg);
-if (r != null) {
-return unescape(r[2]);
-}
-return null;
-}
-   v = getQueryString('uuid');
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) {
+        return unescape(r[2]);
+      }
+      return null;
+    }
+    v = getQueryString('uuid');
     if (v){
       document.getElementById('connect-to-peer').value = "/" + v;
+      connectToPeer();
       document.getElementById('connect-to-peer-bt').click();
     }
   </script>
