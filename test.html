@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>网上订单</title>
+<style type="text/css">
+body{
+	font-size:13px;
+	line-height:25px;
+	}
+table{
+	border-top: 1px solid #333;
+	border-left: 1px solid #333;
+	width:400px;
+}
+td{
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+	text-align:center;
+	}
+.title{	
+	font-weight:bold;
+	background-color: #cccccc;
+}
+
+      
+</style>
+</head>
+
+<body>
+	<script type="text/javascript">
+		function addRow() {
+			var tab = document.getElementById("order");
+			var newrow = tab.insertRow(tab.rows.length-1);
+			cell0 = newrow.insertCell(0);
+			// innerText是啥子东西属性
+			cell0.innerHTML = "玫瑰保湿洗面奶";
+			cell1 = newrow.insertCell(1);
+			cell1.innerHTML = "2";
+			cell2 = newrow.insertCell(2);
+			cell2.innerHTML = "¥35";
+			cell3 = newrow.insertCell(3);
+			cell3.innerHTML = "<input type='button' value='删除' οnclick='delRow(this)'><input type='button' value='修改' οnclick='editRow(this)'>";
+			// cell4 = newrow.insertCell(2);
+		}
+		
+		function delRow(obj) {
+			var tab = document.getElementById("order");
+			tab.deleteRow(obj.parentNode.parentNode.rowIndex);
+		}
+		
+		function editRow(obj) {
+			var tab = document.getElementById("order");
+			var trp = obj.parentNode.parentNode;	//也就是该行对象
+			var tdobj = trp.cells;
+			for(var i = 0; i < 2; i++) {
+				tdobj[0].innerHTML ="<input type='text' id='new1'/>";
+			}
+			tdobj[3].innerHTML = "<input type='button' value='删除' οnclick='delRow(this)'><input type='button' value='确定' οnclick='getBack(this)'>";
+				
+		}
+		
+		function getBack(obj) {
+			var tab = document.getElementById("order");
+			var trp = obj.parentNode.parentNode;	//也就是该行对象
+			var tdobj = trp.cells;
+			// document.getElementById("")
+			tdobj[0].innerHTML = document.getElementById("new1").value;
+			// tdobj[1].innerHTML = "";
+			tdobj[3].innerHTML = "<input type='button' value='删除' οnclick='delRow(this)'><input id='edit1' type='button' value='修改' οnclick='editRow(this)' />"
+		}
+	</script>
+	
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="order">
+  <tr class="title">
+    <td>商品名称</td>
+    <td>数量</td>
+    <td>单价</td>
+     <td>操作</td>
+  </tr>
+  <tr id="row1">
+    <td>玫瑰保湿睡眠面膜</td>
+    <td>5</td>
+    <td>&yen;48</td>
+    <td><input name="del" type="button" value="删除"  onclick="delRow(this)"/>
+     <input name="edit" type="button" value="修改"  onclick="editRow(this)"/></td>
+  </tr>
+  <tr>
+    <td style="text-align:center; height:30px;" colspan="4">
+    <input name="bsn" type="button" value="增加定单" onclick="addRow()"/></td>
+  </tr>
+</table>
+
+</body>
+</html>
