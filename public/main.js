@@ -241,3 +241,17 @@ let connectToPeer = () => {
     };
 
 window.connectToPeer = connectToPeer;
+
+function getQueryString(name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) {
+        return unescape(r[2]);
+      }
+      return null;
+}
+var v = getQueryString('uuid');
+if (v){
+  document.getElementById('connect-to-peer').value = "/" + v;
+  document.getElementById('connect-to-peer-bt').click();
+}

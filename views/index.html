@@ -30,20 +30,4 @@
     <div id="QRcodeCanvas"></div>
     <video class="remote-audio" autoplay playsinline></video>
   </body>
-  <script>
-    function getQueryString(name) {
-      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-      var r = window.location.search.substr(1).match(reg);
-      if (r != null) {
-        return unescape(r[2]);
-      }
-      return null;
-    }
-    v = getQueryString('uuid');
-    if (v){
-      document.getElementById('connect-to-peer').value = "/" + v;
-      connectToPeer();
-      document.getElementById('connect-to-peer-bt').click();
-    }
-  </script>
 </html>
