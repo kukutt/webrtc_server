@@ -16,10 +16,6 @@
     <script src="/lib/jquery.qrcode.min.js"></script>
     <!-- import the webpage's client-side javascript file -->
     <script src="/main.js" type="module"></script>
-    <script>
-      document.getElementById('connect-to-peer').value = "/ccc";
-    </script>
-    
   </head>
   
   <body>
@@ -33,7 +29,9 @@
     <button onclick="genQRcode()">QRcode</button>
     <div id="QRcodeCanvas"></div>
     <a href="/test.html">test</a>
-    
-  <video class="remote-audio" autoplay playsinline></video>
+    <video class="remote-audio" autoplay playsinline></video>
   </body>
+  <script>
+      document.getElementById('connect-to-peer').value = "/ccc";
+  </script>
 </html>
