@@ -253,5 +253,5 @@ function getQueryString(name) {
 var v = getQueryString('uuid');
 if (v){
   document.getElementById('connect-to-peer').value = "/" + v;
-  document.getElementById('connect-to-peer-bt').click();
+  //document.getElementById('connect-to-peer-bt').click();
 }
